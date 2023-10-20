@@ -12,12 +12,15 @@ require("telescope").setup({
 	}
 })
 
--- require("lualine").setup({
--- 	-- extensions = {"drex"}
--- })
-
 require("drex.config").configure({
-	hijack_netrw = true
+	hijack_netrw = true,
+	keybindings = {
+		["n"] = {
+			["<C-t>"] = function ()
+				vim.cmd.tabnew("~/Documents/MyApps")
+			end
+		}
+	}
 })
 
 -- VimTeX stuff

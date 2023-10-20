@@ -30,11 +30,8 @@ end)
 -- drex stuff
 vim.keymap.set("n","-", function ()
 	if vim.bo.filetype == "drex" then
-		print("this is a drex buffer.")
-		local elems = require("drex.elements")
-		elems.open_parent_directory()
+		require("drex.elements").open_parent_directory()
 	else
-		print("this is not a drex buffer.")
 		vim.cmd("Drex %:h")
 	end
 end)
@@ -51,16 +48,15 @@ vim.keymap.set("n","<CR>",function ()
 		vim.cmd.normal("j")
 	end
 end)
+-- *** not navigation stuff, but here to be close to the other <CR> remap ***
 vim.keymap.set("i","<CR>","<leader><BS><CR>")
 
 -- new tab stuff
 function newtabex()
-	local parent = vim.fn.expand("%:h")
-    vim.cmd.tabnew()
-    vim.cmd("edit "..parent)
+	vim.cmd.tabnew("%:h")
 end
-vim.keymap.set("n","<A-t>", newtabex) 
-vim.keymap.set("i","<A-t>", newtabex)
+vim.keymap.set("n","<C-t>", newtabex) 
+vim.keymap.set("i","<C-t>", newtabex)
 
 vim.keymap.set("n","<leader>t",function ()
 	vim.cmd("let @\"='cd C:\\Users\\thoma\\"..vim.fn.expand("%:h").."'")
