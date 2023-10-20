@@ -13,8 +13,9 @@ end
 local function Firefox(argstable)
 	-- opens the current buffer in firefox
 	local file = validate(argstable.args,vim.fn.expand("%:p"))
-	termstuff.make_terminal_window()
-	vim.cmd.terminal("firefox -htmlfile "..file)
+	-- termstuff.make_terminal_window()
+	-- vim.cmd.terminal("firefox -htmlfile "..file)
+	vim.fn.jobstart("firefox -htmlfile "..file)
 end
 vim.api.nvim_create_user_command("Firefox",Firefox,{nargs="?"})
 

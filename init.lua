@@ -12,6 +12,14 @@ require("telescope").setup({
 	}
 })
 
+-- require("lualine").setup({
+-- 	-- extensions = {"drex"}
+-- })
+
+require("drex.config").configure({
+	hijack_netrw = true
+})
+
 -- VimTeX stuff
 vim.cmd("filetype plugin on")
 -- this bit SHOULD be covered in packer.lua

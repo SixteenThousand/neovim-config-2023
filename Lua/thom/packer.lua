@@ -75,4 +75,11 @@ return require("packer").startup(function(use)
 	use "ThePrimeagen/vim-be-good"
 	
 	use "tpope/vim-fugitive"
+	
+	-- use "tpope/vim-vinegar"
+	
+	use {
+		'theblob42/drex.nvim',
+		requires = 'kyazdani42/nvim-web-devicons',
+	}
 end)

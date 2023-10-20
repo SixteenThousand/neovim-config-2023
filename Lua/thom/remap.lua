@@ -3,41 +3,85 @@ vim.g.mapleader = " "
 
 
 -- ++++++++++++ applying new configs ++++++++++++
-function apply_config()
+vim.keymap.set("n","<F12>",function ()
 	vim.cmd.source()
-	vim.cmd.echo('"Change applied!"')
-end
-vim.keymap.set("n","<F12>",apply_config)
+	print("Change applied!")
+end)
 
 
 -- +++++++++++++ navigation ++++++++++++
-vim.keymap.set("n","<leader>-",function()
-	vim.cmd.Ex()
-	vim.cmd.set("number")
-end)
+vim.keymap.set("n","<leader>ee",":buffer ")
 
-vim.keymap.set("n","<leader>hh",function ()
+vim.keymap.set("n","<leader>eh",function ()
 	vim.cmd.edit("~/Documents/Programs")
 	vim.cmd.set("number")
 end)
 
-vim.keymap.set("n","<leader>ha",function ()
+vim.keymap.set("n","<leader>ea",function ()
 	vim.cmd.edit("~/Documents/MyApps")
 	vim.cmd.set("number")
 end)
 
-vim.keymap.set("n","@",function ()
+vim.keymap.set("n","e'",function ()
     vim.cmd("edit ~/AppData/Local/nvim")
 	vim.cmd.set("number")
 end)
 
-vim.keymap.set("n","<leader>e",":buffer ")
+-- drex stuff
+vim.keymap.set("n","-", function ()
+	if vim.bo.filetype == "drex" then
+		print("this is a drex buffer.")
+		local elems = require("drex.elements")
+		elems.open_parent_directory()
+	else
+		print("this is not a drex buffer.")
+		vim.cmd("Drex %:h")
+	end
+end)
+vim.keymap.set("n","<CR>",function ()
+	if vim.bo.filetype == "drex" then
+		local elems = require("drex.elements")
+		local line = vim.api.nvim_get_current_line()
+		if require("drex.utils").is_directory(line) then
+			elems.open_directory()
+		else
+			elems.expand_element()
+		end
+	else
+		vim.cmd.normal("j")
+	end
+end)
+vim.keymap.set("i","<CR>","<leader><BS><CR>")
+
+-- new tab stuff
+function newtabex()
+	local parent = vim.fn.expand("%:h")
+    vim.cmd.tabnew()
+    vim.cmd("edit "..parent)
+end
+vim.keymap.set("n","<A-t>", newtabex) 
+vim.keymap.set("i","<A-t>", newtabex)
 
 vim.keymap.set("n","<leader>t",function ()
-	vim.cmd("let @\"='cd C:/Users/thoma/"..vim.fn.expand("%:h").."'")
+	vim.cmd("let @\"='cd C:\\Users\\thoma\\"..vim.fn.expand("%:h").."'")
 	vim.cmd.tabnew()
 	vim.cmd.terminal()
 end)
+
+
+-- ++++++++++++ vimtex/latex stuff ++++++++++++
+vim.keymap.set("n","<leader>li","a\\item")
+vim.keymap.set("n","<leader>le",function ()
+	local env = vim.api.nvim_get_current_line():match("\\begin{(.*)}")
+	if env == nil then
+		print("Error: Not a latex environment!")
+	else
+		vim.cmd.normal("o\\end{"..env.."}")
+		vim.cmd.stopinsert()
+		vim.cmd.normal("O	")
+	end
+end)
+
 
 -- ++++++++++++ telescope ++++++++++++
 local tlscp = require "telescope.builtin"
@@ -54,10 +98,10 @@ end)
 vim.keymap.set("n","<leader>fg",tlscp.live_grep,{})
 vim.keymap.set("n","<leader>fb",tlscp.buffers,{})
 vim.keymap.set("n","<leader>fh",tlscp.help_tags,{})
-vim.keymap.set("n","<leader>fc",tlscp.colorscheme,{})
+vim.keymap.set("n","<leader>fc",tlscp.colorscheme)
 
 
--- ++++++++++++ git stuff ++++++++++++
+-- ++++++++++++ git stuff (vim-fugitive) ++++++++++++
 vim.keymap.set("n","<leader>gg",":Git ")
 vim.keymap.set("n","<leader>gs",function () vim.cmd("Git status") end)
 vim.keymap.set("n","<leader>ga",function ()
@@ -65,14 +109,11 @@ vim.keymap.set("n","<leader>ga",function ()
 	print("All Changes Staged! Proceed to commit!")
 end)
 vim.keymap.set("n","<leader>gc",":Git commit -m ")
-vim.keymap.set("n","<leader>gb",":Git branch ")
-vim.keymap.set("n","<leader>gp",function ()
-	vim.cmd("Git push")
-end)
 vim.keymap.set("n","<leader>gf",function ()
 	vim.cmd("Git commit -F CommitMsg.txt")
 	print("Committed from file <<CommitMsg.txt>>!")
 end)
+vim.keymap.set("n","<leader>gb",":Git branch ")
 
 
 -- ++++++++++++ reload current file ++++++++++++
@@ -81,16 +122,6 @@ vim.keymap.set("n","<A-r>",function ()
 	vim.cmd.Ex()
 	vim.cmd.edit(current)
 end)
-
-
--- ++++++++++++ new tab ++++++++++++
-function newtabex()
-	local parent = vim.fn.expand("%:h")
-    vim.cmd.tabnew()
-    vim.cmd("edit "..parent)
-end
-vim.keymap.set("n","<C-t>", newtabex) 
-vim.keymap.set("i","<C-t>", newtabex)
 
 
 -- +++++++++++++ comments ++++++++++++
@@ -118,16 +149,6 @@ vim.keymap.set("n","<leader>xp","\"xp")
 -- ++++++++++++ suggestions & completion ++++++++++++
 vim.keymap.set("i","<C-c>","<C-n>")
 vim.keymap.set("i","<C-d>","<C-y>")
-vim.keymap.set("n","<leader>le",function ()
-	local env = vim.api.nvim_get_current_line():match("\\begin{(.*)}")
-	if env == nil then
-		print("Error: Not a latex environment!")
-	else
-		vim.cmd.normal("o\\end{"..env.."}")
-		vim.cmd.stopinsert()
-		vim.cmd.normal("O	")
-	end
-end)
 
 
 -- ++++++++++++ sometimes I just can't be bothered to write stuff, y'know? ++++++++++++
@@ -168,11 +189,8 @@ end
 vim.keymap.set("n","<A-b>",tbc_comment)
 vim.keymap.set("i","<A-b>",tbc_comment)
 
--- latex stuff
-vim.keymap.set("n","<leader>li","a\\item")
 
-
--- ++++++++++++ searching/highlighting/colours ++++++++++++
+-- ++++++++++++ searching/highlighting ++++++++++++
 vim.keymap.set("n","<leader>\\",vim.cmd.nohlsearch)
 	-- gets rid of any pesky search highlighting
 
@@ -185,7 +203,6 @@ end)
 
 
 -- ++++++++++++ changing modes +++++++++++++
-vim.keymap.set("i","<CR>","<leader><BS><CR>")
 vim.keymap.set("i","<C-v>",function ()
 	vim.cmd.stopinsert()
 	vim.cmd.Visual()
@@ -205,13 +222,13 @@ vim.keymap.set("n","<A-k>","<C-u>")
 
 
 -- +++++++++++++ window stuff +++++++++++++
-vim.keymap.set("n","<A-l>",function()
+vim.keymap.set("n","<A-=>",function()
 	vim.cmd.wincmd("10>")
 end)
-vim.keymap.set("n","<A-h>",function()
+vim.keymap.set("n","<A-->",function()
 	vim.cmd.wincmd("10<")
 end)
-
+-- exiting a buffer/window
 vim.keymap.set("n","<A-w>",function ()
 	local layout = vim.fn.winlayout()
 	if layout[1] == "row" then
@@ -221,9 +238,20 @@ vim.keymap.set("n","<A-w>",function ()
 	end
 	vim.cmd.quit()
 end)
+vim.keymap.set("n","<C-A-w>",function ()
+	local layout1 = vim.fn.winlayout()[1]
+	if layout1 == "row" then 
+		vim.cmd.wincmd("l")
+	elseif layout1 == "col" then
+		vim.cmd.wincmd("j")
+	end
+	vim.cmd.bdelete()
+end)
+vim.keymap.set("n","<C-A-d>",":bdelete term*<C-a><CR>")
+-- navigating windows
 basic_motions = {"h","j","k","l"}
 for i = 1,4 do
-	local mymap = string.format("<C-%s>",basic_motions[i])
+	local mymap = string.format("<leader>w%s",basic_motions[i])
 	vim.keymap.set("n",mymap,function ()
 		vim.cmd.wincmd(basic_motions[i])
 	end)
@@ -238,22 +266,9 @@ end)
 vim.keymap.set("n","<C-s>",vim.cmd.write)
 
 
--- ++++++++++++ buffers ++++++++++++
-vim.keymap.set("n","<C-A-w>",function ()
-	local layout1 = vim.fn.winlayout()[1]
-	if layout1 == "row" then 
-		vim.cmd.wincmd("l")
-	elseif layout1 == "col" then
-		vim.cmd.wincmd("j")
-	end
-	vim.cmd.bdelete()
-end)
-vim.keymap.set("n","<C-A-d>",":bdelete term*<C-a><CR>")
-
-
 -- ++++++++++++ using other modules that i wrote ++++++++++++
 
-
+-- terminal stuff
 local terminal_stuff = require("thom.terminal_stuff")
 vim.keymap.set("n","<A-o>",terminal_stuff.compile)
 vim.keymap.set("i","<A-o>",terminal_stuff.compile)
@@ -262,25 +277,21 @@ vim.keymap.set("i","<A-p>",terminal_stuff.run)
 vim.keymap.set("n","<A-e>",terminal_stuff.run_exe)
 vim.keymap.set("i","<A-e>",terminal_stuff.run_exe)
 
-
-
+-- session stuff
 local sessions = require "thom.sessions"
 vim.keymap.set("n","<A-s>",LoadSession)
 vim.keymap.set("n","<A-q>",SaveSession)
 
-
+-- yona
 vim.keymap.set("n","<A-i>",function () vim.cmd("Yona build") end)
 
--- ++++++++++++ colours ++++++++++++
+-- colours
 local colours = require("thom.colours")
-
 vim.keymap.set("n","<leader>c",colours.colourscheme_popup)
 -- see telescope for another keymap that does something very similar
-
 vim.keymap.set("n","<F2>",function()
 	vim.cmd.set("background=dark")
 end)
-
 vim.keymap.set("n","<F3>",function()
 	vim.cmd.set("background=light")
 end)
