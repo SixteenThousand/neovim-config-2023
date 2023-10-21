@@ -38,6 +38,20 @@ local function Help()
 end
 vim.api.nvim_create_user_command("Help",Help,{})
 
+-- telescope
+local function find_in_folder()
+	local here = vim.fn.expand("%:p:h")
+	if vim.bo.filetype == "drex" then
+		here = here:sub(("drex://"):len()+1)
+	end
+	require("Telescope.builtin").find_files({
+		["no_ignore"] = true,
+		["search_dirs"] = {here}
+	})
+end
+vim.api.nvim_create_user_command("Scope",find_in_folder,{})
+
+
 vim.cmd("command! Visual normal! v")
 
 
