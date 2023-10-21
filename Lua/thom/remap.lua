@@ -62,10 +62,16 @@ end
 vim.keymap.set("n","<C-t>", newtabex) 
 vim.keymap.set("i","<C-t>", newtabex)
 
-vim.keymap.set("n","<leader>t",function ()
+-- ++++++++++++ opening a terminal (in a new tab) ++++++++++++
+vim.keymap.set("n","<leader>tt",function ()
 	vim.cmd("let @\"='cd "..vim.fn.expand("%:p:h").."'")
 	vim.cmd.tabnew()
 	vim.cmd.terminal()
+end)
+vim.keymap.set("n","<leader>th",function ()
+	vim.cmd.startinsert()
+	vim.cmd.stopinsert()
+	vim.cmd.normal("p")
 end)
 
 
@@ -108,7 +114,7 @@ vim.keymap.set("n","<leader>ga",function ()
 	vim.cmd("Git add -A")
 	print("All Changes Staged! Proceed to commit!")
 end)
-vim.keymap.set("n","<leader>gc",":Git commit -m ")
+vim.keymap.set("n","<leader>gc",":Git commit -m \"")
 vim.keymap.set("n","<leader>gf",function ()
 	vim.cmd("Git commit -F CommitMsg.txt")
 	print("Committed from file <<CommitMsg.txt>>!")
