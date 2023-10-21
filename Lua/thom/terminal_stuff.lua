@@ -12,16 +12,8 @@ function make_terminal_window()
 	end
 end
 
--- sometimes it's nice to just jump back into powershell
-function ToTerminal()
-	-- local dir = vim.fn.expand("%:h")
-	make_terminal_window()
-end
 
-
-
-
-local function compile()
+local function compile_win()
 	local current_dir = vim.fn.expand("%:h")
 	local current_file = vim.fn.expand("%:t")
 	local current_ext = vim.fn.expand("%:e")
@@ -30,7 +22,7 @@ local function compile()
 	vim.cmd.wincmd("h")
 end
 
-local function run()
+local function run_win()
 	local current_file = vim.fn.expand("%:t")
 	local current_dir = vim.fn.expand("%:h")
 	local current_ext = vim.fn.expand("%:e")
@@ -39,7 +31,7 @@ local function run()
 	vim.cmd.wincmd("h")
 end
 
-local function run_exe()
+local function runexe_win()
 	local current_dir = vim.fn.expand("%:h")
 	local current_file = vim.fn.expand("%:t")
 	local current_ext = vim.fn.expand("%:e")
@@ -49,11 +41,48 @@ local function run_exe()
 end
 
 
+local function compile_cmd()
+	vim.cmd(string.format(
+		"!compile -dir %s -file %s -ext %s",
+		vim.fn.expand("%:h"),
+		vim.fn.expand("%:t"),
+		vim.fn.expand("%:e")
+	))
+end
+
+local function run_cmd()
+	vim.cmd(string.format(
+		"!run -dir %s -file %s -ext %s",
+		vim.fn.expand("%:h"),
+		vim.fn.expand("%:t"),
+		vim.fn.expand("%:e")
+	))
+end
+
+local function runexe_cmd()
+	vim.cmd(string.format(
+		"!runexe -dir %s -file %s -ext %s",
+		vim.fn.expand("%:h"),
+		vim.fn.expand("%:t"),
+		vim.fn.expand("%:e")
+	))
+end
+
+
+vim.api.nvim_create_user_command("Run",run_win,{})
+vim.api.nvim_create_user_command("Compile",compile_win,{})
+vim.api.nvim_create_user_command("RunExe",runexe_win,{})
+
+
+
 local exports = {
 	["make_terminal_window"] = make_terminal_window,
-	["compile"] = compile,
-	["run"] = run,
-	["run_exe"] = run_exe,
+	["compile_cmd"] = compile_cmd,
+	["run_cmd"] = run_cmd,
+	["runexe_cmd"] = runexe_cmd,
+	["compile_win"] = compile_win,
+	["run_win"] = run_win,
+	["runexe_win"] = runexe_win
 }
 
 

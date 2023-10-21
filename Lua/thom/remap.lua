@@ -13,21 +13,23 @@ end)
 vim.keymap.set("n","<leader>ee",":buffer ")
 
 vim.keymap.set("n","<leader>eh",function ()
-	vim.cmd.edit("~/Documents/Programs")
+	vim.cmd("Drex ~/Documents/Programs")
 	vim.cmd.set("number")
 end)
 
 vim.keymap.set("n","<leader>ea",function ()
-	vim.cmd.edit("~/Documents/MyApps")
+	vim.cmd("Drex ~/Documents/MyApps")
 	vim.cmd.set("number")
 end)
 
 vim.keymap.set("n","e'",function ()
-    vim.cmd("edit ~/AppData/Local/nvim")
+    vim.cmd("Drex ~/AppData/Local/nvim")
 	vim.cmd.set("number")
 end)
 
 -- drex stuff
+-- for when it inevitably goes wrong
+vim.keymap.set("n","<leader>ed",":Drex")
 vim.keymap.set("n","-", function ()
 	if vim.bo.filetype == "drex" then
 		require("drex.elements").open_parent_directory()
@@ -53,13 +55,15 @@ vim.keymap.set("i","<CR>","<leader><BS><CR>")
 
 -- new tab stuff
 function newtabex()
-	vim.cmd.tabnew("%:h")
+	local parent = vim.fn.expand("%:h")
+	vim.cmd.tabnew()
+	vim.cmd("Drex "..parent)
 end
 vim.keymap.set("n","<C-t>", newtabex) 
 vim.keymap.set("i","<C-t>", newtabex)
 
 vim.keymap.set("n","<leader>t",function ()
-	vim.cmd("let @\"='cd C:\\Users\\thoma\\"..vim.fn.expand("%:h").."'")
+	vim.cmd("let @\"='cd "..vim.fn.expand("%:p:h").."'")
 	vim.cmd.tabnew()
 	vim.cmd.terminal()
 end)
@@ -115,7 +119,7 @@ vim.keymap.set("n","<leader>gb",":Git branch ")
 -- ++++++++++++ reload current file ++++++++++++
 vim.keymap.set("n","<A-r>",function ()
 	local current = vim.fn.expand("%:p")
-	vim.cmd.Ex()
+	vim.cmd.Explore()
 	vim.cmd.edit(current)
 end)
 
@@ -130,7 +134,7 @@ vim.keymap.set("v","<C-_>",commapi.toggle.linewise.current)
 
 
 -- ++++++++++++ copy & paste ++++++++++++
-vim.keymap.set("n", "<leader>y","\"+y")
+vim.keymap.set("n","<leader>y","\"+y")
 vim.keymap.set("n","<leader>p","\"+p")
 vim.keymap.set("v","<leader>y","\"+y")
 vim.keymap.set("v","<leader>p","\"+p")
@@ -265,13 +269,20 @@ vim.keymap.set("n","<C-s>",vim.cmd.write)
 -- ++++++++++++ using other modules that i wrote ++++++++++++
 
 -- terminal stuff
-local terminal_stuff = require("thom.terminal_stuff")
-vim.keymap.set("n","<A-o>",terminal_stuff.compile)
-vim.keymap.set("i","<A-o>",terminal_stuff.compile)
-vim.keymap.set("n","<A-p>",terminal_stuff.run)
-vim.keymap.set("i","<A-p>",terminal_stuff.run)
-vim.keymap.set("n","<A-e>",terminal_stuff.run_exe)
-vim.keymap.set("i","<A-e>",terminal_stuff.run_exe)
+local term = require("thom.terminal_stuff")
+vim.keymap.set("n","<A-o>",term.compile_cmd)
+vim.keymap.set("i","<A-o>",term.compile_cmd)
+vim.keymap.set("n","<A-p>",term.run_cmd)
+vim.keymap.set("i","<A-p>",term.run_cmd)
+vim.keymap.set("n","<A-e>",term.runexe_cmd)
+vim.keymap.set("i","<A-e>",term.runexe_cmd)
+vim.keymap.set("n","<A-S-o>",term.compile_win)
+vim.keymap.set("i","<A-S-o>",term.compile_win)
+vim.keymap.set("n","<A-S-p>",term.run_win)
+vim.keymap.set("i","<A-S-p>",term.run_win)
+vim.keymap.set("n","<A-S-e>",term.runexe_win)
+vim.keymap.set("i","<A-S-e>",term.runexe_win)
+
 
 -- session stuff
 local sessions = require "thom.sessions"

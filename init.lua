@@ -13,7 +13,7 @@ require("telescope").setup({
 })
 
 require("drex.config").configure({
-	hijack_netrw = true,
+	-- hijack_netrw = true,
 	keybindings = {
 		["n"] = {
 			["<C-t>"] = function ()
