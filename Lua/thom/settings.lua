@@ -3,8 +3,6 @@
 vim.cmd.set("path=.,~/Documents/Programs/**2/,~/Documents/O-Backup_Management/,,")
 
 -- line numbers
--- vim.cmd.set("number")
--- vim.cmd.set("relativenumber")
 vim.cmd.autocmd("FileType * set number")
 vim.cmd.autocmd("FileType * set relativenumber")
 
@@ -36,3 +34,13 @@ vim.cmd.set("autowriteall")
 
 -- allow h & l to take you to a new line
 vim.cmd.set("whichwrap=b,s,h,l")
+
+
+-- trying to deal with drex bug
+-- vim.api.nvim_create_autocmd("SessionLoadPost",{
+-- 	pattern = "drex://*",
+-- 	nested = true,
+-- 	callback = function ()
+-- 		print("We got here!")
+-- 	end,
+-- })

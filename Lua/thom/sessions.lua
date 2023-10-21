@@ -35,12 +35,31 @@ local function load_session(_,session_name)
 	end
 end
 
+local function delete_drex_buffers(path)
+	local fp = io.open(path,"r")
+	local newlines = {}
+	for line in fp:lines() do
+		if line:find("drex://") == nil then
+			newlines[#newlines+1] = line
+		end
+	end
+	fp:close()
+	print(newlines)
+	fp = io.open(path,"w")
+	for i=1,#newlines do
+		fp:write(newlines[i])
+		fp:write("\n")
+	end
+	fp:close()
+end
+
 local function save_session(_,session_name)
 	if session_name == "continue sans session" then
 		vim.cmd.quitall()
 	else
 		vim.cmd.quit()
 		vim.cmd("mksession! "..sess_file(session_name))
+		delete_drex_buffers(sess_file(session_name))
 		vim.cmd("quitall!")
 	end
 end
