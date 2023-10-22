@@ -1,35 +1,6 @@
 -- ++++++++++++ plugins (this is neovim, after all) ++++++++++++
 require("thom.packer")
-require("telescope").setup({
-	vimgrep_arguments = {
-		"rg",
-		"--color=never",
-		"--no-heading",
-		"--with-filename",
-		"--line-number",
-		"--column",
-		"--smart-case"
-	}
-})
-
-require("drex.config").configure({
-	-- hijack_netrw = true,
-	keybindings = {
-		["n"] = {
-			["<C-t>"] = function ()
-				vim.cmd.tabnew("~/Documents/MyApps")
-			end
-		}
-	}
-})
-
--- VimTeX stuff
-vim.cmd("filetype plugin on")
--- this bit SHOULD be covered in packer.lua
--- require 'nvim-treesitter.configs'.setup {
--- 	ignore_install = { "latex" },
--- 	-- more stuff here
--- }
+require("thom.plugins")
 
 
 -- making it use PowerShell (v7)

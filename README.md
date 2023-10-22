@@ -7,4 +7,4 @@ over the past few months.
 
 ## Planned Changes
  - Add LSP configuration
- - make terminal stuff also run through use of :!
+ - Fix issue with Drex and loading of session files
