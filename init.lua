@@ -19,6 +19,7 @@ require("thom.yona")
 
 -- misc. user-defined functions
 require("thom.functions")
+require("thom.format")
 
 
 -- ++++++++++++ Some default settings +++++++++++

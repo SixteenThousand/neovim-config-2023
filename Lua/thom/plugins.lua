@@ -17,7 +17,10 @@ require("drex.config").configure({
 	keybindings = {
 		["n"] = {
 			["<C-t>"] = function ()
-				vim.cmd.tabnew("~/Documents/MyApps")
+				local parent = vim.fn.expand("%:p:h")
+				vim.cmd.tabnew()
+				vim.cmd("Drex "..parent)
+				print("We got here!")
 			end
 		}
 	}

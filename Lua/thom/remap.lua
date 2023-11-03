@@ -55,7 +55,7 @@ vim.keymap.set("i","<CR>","<leader><BS><CR>")
 
 -- new tab stuff
 function newtabex()
-	local parent = vim.fn.expand("%:h")
+	local parent = vim.fn.expand("%:p:h")
 	vim.cmd.tabnew()
 	vim.cmd("Drex "..parent)
 end
@@ -76,7 +76,7 @@ end)
 
 
 -- ++++++++++++ vimtex/latex stuff ++++++++++++
-vim.keymap.set("n","<leader>li","a\\item")
+vim.keymap.set("n","<leader>li","o\\item")
 vim.keymap.set("n","<leader>le",function ()
 	local env = vim.api.nvim_get_current_line():match("\\begin{(.*)}")
 	if env == nil then
@@ -150,6 +150,8 @@ vim.keymap.set("v", "<leader>d","\"_d")
 	-- these send things to the void registry, never to be seen again
 vim.keymap.set("n","<leader>xx","\"xd")
 vim.keymap.set("n","<leader>xp","\"xp")
+vim.keymap.set("v","<leader>xx","\"xd")
+vim.keymap.set("v","<leader>xp","\"xp")
 
 
 -- ++++++++++++ suggestions & completion ++++++++++++
@@ -165,6 +167,7 @@ local print_statements = {
 	["rs"] = "println!(",
 	["hs"] = "putStrLn ",
 	["js"] = "console.log(",
+	["html"] = "console.log(",
 	["py"] = "print(",
 	["lua"] = "print(",
 	["c"] = "printf(\"%d\\n\", "
@@ -182,6 +185,8 @@ local function write_custom_message()
 end
 vim.keymap.set("i","<A-m>",write_custom_message)
 
+-- highlight a place to be completed
+vim.keymap.set("i","<A-S-m>","************")
 -- end of line comments
 local function debug_comment()
 	vim.cmd.normal("gcAdebug") -- nice!!
