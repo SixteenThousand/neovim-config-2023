@@ -187,6 +187,9 @@ vim.keymap.set("i","<A-m>",write_custom_message)
 
 -- highlight a place to be completed
 vim.keymap.set("i","<A-S-m>","************")
+
+vim.keymap.set("t","<A-e>","exit")
+
 -- end of line comments
 local function debug_comment()
 	vim.cmd.normal("gcAdebug") -- nice!!
