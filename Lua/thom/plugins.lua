@@ -45,3 +45,14 @@ require("lualine").setup({
 		lualine_z = {"location"}
 	}
 })
+
+
+-- autoclose html/xml tags
+vim.g.closetag_filenames = "*.html,*.xml,*.svg,*.js"
+vim.g.closetag_filetypes = "html,xml,svg"
+vim.g.closetag_emptyTags_caseSensitive = 1
+vim.g.closetag_shortcut = ">"
+vim.g.closetag_close_shortcut = "<C-A-F1>"
+-- this one is designed to never be used
+
+-- require("vim-jsx-pretty").setup()

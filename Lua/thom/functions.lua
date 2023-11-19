@@ -15,7 +15,7 @@ local function Firefox(argstable)
 	local file = validate(argstable.args,vim.fn.expand("%:p"))
 	-- termstuff.make_terminal_window()
 	-- vim.cmd.terminal("firefox -htmlfile "..file)
-	vim.fn.jobstart("firefox -htmlfile "..file)
+	vim.fn.jobstart("firefox -htmlfile '"..file.."'")
 end
 vim.api.nvim_create_user_command("Firefox",Firefox,{nargs="?"})
 
@@ -23,7 +23,11 @@ local function CopyPath(argstable)
 	-- puts the current buffer's full path in the spcified register,
 	-- or into the default register if none is given
 	local register = validate(argstable.args,"\"")
-	vim.cmd("let @"..register.."=expand(\"%:p\")")
+	local path = vim.fn.expand("%:p")
+	if path:sub(1,7) == "drex://" then
+		path = path:sub(8,-1)
+	end
+	vim.fn.setreg(register,path)
 	print("Path copied!")
 end
 vim.api.nvim_create_user_command("Path",CopyPath,{nargs="?"})
@@ -54,6 +58,20 @@ vim.api.nvim_create_user_command("Scope",find_in_folder,{})
 
 vim.cmd("command! Visual normal! v")
 
+
+-- ++++++++++++ abbreviations ++++++++++++
+vim.api.nvim_create_user_command("Spell",
+	function ()
+		vim.cmd.setlocal("spell spelllang=en_gb")
+	end,
+	{}
+)
+vim.api.nvim_create_user_command("Nospell",
+	function ()
+		vim.cmd.setlocal("nospell")
+	end,
+	{}
+)
 
 local exports = {
 	["validate"] = validate

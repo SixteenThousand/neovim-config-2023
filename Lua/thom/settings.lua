@@ -16,13 +16,9 @@ vim.cmd.autocmd("FileType lisp set nolisp")
 vim.cmd.autocmd("FileType * set noexpandtab")
 vim.cmd.autocmd("FileType * set formatoptions-=r formatoptions-=c formatoptions-=o")
 
--- autoclose html/xml tags
-vim.g.closetag_filenames = "*.html,*.xml,*.svg"
-vim.g.closetag_filetypes = "html,xml,svg"
-vim.g.closetag_emptyTags_caseSensitive = 1
-vim.g.closetag_shortcut = ">"
-vim.g.closetag_close_shortcut = "<C-A-F1>"
--- this one is designed to never be used
+-- text width
+vim.cmd.set("textwidth=80")
+
 
 -- buffers?? save?? saving?? idk what to call this bit
 vim.cmd.set("autowrite")

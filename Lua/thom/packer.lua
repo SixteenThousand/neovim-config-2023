@@ -69,7 +69,8 @@ return require("packer").startup(function(use)
 	use "alvan/vim-closetag"
 	
 	use "lervag/vimtex"
-
+	
+	use "maxmellon/vim-jsx-pretty"
 	
 	-- ++++++++++++ other ++++++++++++
 	use "ThePrimeagen/vim-be-good"
