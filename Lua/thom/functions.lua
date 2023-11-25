@@ -10,19 +10,19 @@ local function validate(arg,default)
 	end
 end
 
-local function Firefox(argstable)
+local function Firefox(opts)
 	-- opens the current buffer in firefox
-	local file = validate(argstable.args,vim.fn.expand("%:p"))
+	local file = validate(opts.args,vim.fn.expand("%:p"))
 	-- termstuff.make_terminal_window()
 	-- vim.cmd.terminal("firefox -htmlfile "..file)
 	vim.fn.jobstart("firefox -htmlfile '"..file.."'")
 end
 vim.api.nvim_create_user_command("Firefox",Firefox,{nargs="?"})
 
-local function CopyPath(argstable)
+local function CopyPath(opts)
 	-- puts the current buffer's full path in the spcified register,
 	-- or into the default register if none is given
-	local register = validate(argstable.args,"\"")
+	local register = validate(opts.args,"\"")
 	local path = vim.fn.expand("%:p")
 	if path:sub(1,7) == "drex://" then
 		path = path:sub(8,-1)
@@ -71,6 +71,16 @@ vim.api.nvim_create_user_command("Nospell",
 		vim.cmd.setlocal("nospell")
 	end,
 	{}
+)
+
+vim.api.nvim_create_user_command("Jaeha",
+	function (opts)
+		print(opts.fargs[1])
+		print(opts.fargs[2])
+		print(opts.fargs[3])
+		print(opts.bang)
+	end,
+	{nargs="*"}
 )
 
 local exports = {

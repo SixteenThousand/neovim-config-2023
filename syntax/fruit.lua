@@ -37,3 +37,6 @@ vim.cmd.highlight("link fruitDoubleArrow operator")
 
 vim.cmd.syntax("match fruitNumber /\\d/")
 vim.cmd.highlight("link fruitNumber number")
+
+vim.cmd.syntax("match fruitURL /https:\\/\\/.*\\/ /")
+vim.cmd.highlight("link fruitURL Special")

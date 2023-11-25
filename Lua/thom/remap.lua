@@ -305,6 +305,9 @@ vim.keymap.set("n","<A-q>",SaveSession)
 
 -- yona
 vim.keymap.set("n","<A-i>",function () vim.cmd("Yona build") end)
+vim.keymap.set("i","<A-i>",function () vim.cmd("Yona! build") end)
+vim.keymap.set("n","<A-S-i>",function () vim.cmd("Yona build") end)
+vim.keymap.set("i","<A-S-i>",function () vim.cmd("Yona! build") end)
 
 -- colours
 local colours = require("thom.colours")

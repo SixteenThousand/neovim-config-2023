@@ -1,29 +1,24 @@
 -- this file is for project management stuff
 
+local M = {}
+
 local terminal_stuff = require("thom.terminal_stuff")
 
 local yona = " && yona "
 
-local function call_yona(argstable)
-	local move = "cd "..vim.fn.expand("%:h")
-	terminal_stuff.make_terminal_window()
-	vim.cmd.terminal(move..yona..argstable.args)
-	vim.cmd.wincmd("h")
+function M.call_yona(opts)
+	local shell_cmd = "cd "..vim.fn.expand("%:h")..yona..opts.args
+	if opts.bang then
+		terminal_stuff.make_terminal_window()
+		vim.cmd.terminal(shell_cmd)
+		vim.cmd.wincmd("h")
+	else
+		vim.cmd("!"..shell_cmd)
+	end
 end
 
-local function Yona(cmd)
-	local move = "cd "..vim.fn.expand("%:h")
-	terminal_stuff.make_terminal_window()
-	vim.cmd.terminal(move..yona..cmd)
-	vim.cmd.wincmd("h")
-end
+vim.api.nvim_create_user_command("Yona",M.call_yona,{nargs=1,bang=true})
 
 
-vim.api.nvim_create_user_command("Yona",call_yona,{nargs=1})
 
-
-local exports = {
-	["Yona"] = Yona
-}
-
-return exports
+return M
