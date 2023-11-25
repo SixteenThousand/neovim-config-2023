@@ -7,7 +7,9 @@ over the past few months.
 
 ## Planned Changes
  - Add LSP configuration
- - Fix issue with Drex and loading of session files
+ - Fix issue with Drex and loading of session files (now partially fixed;
+	this is not an issue now, however the solution is quite hacky and probably
+	quite fragile)
  - Add autoformatting (most likely using Prettier, or just existing vim tools)
 	to automatically narrow text to be 80 characters wide
  - Improve support for staging indivdual files (with Fugitive)
