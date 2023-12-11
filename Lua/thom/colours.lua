@@ -5,7 +5,6 @@ local colourschemes = {
 	"delek",
 	"desert",
 	"elflord",
-	"evening",
 	"everforest; hard",
 	"everforest; medium",
 	"everforest; soft",

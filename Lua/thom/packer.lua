@@ -77,10 +77,11 @@ return require("packer").startup(function(use)
 	
 	use "tpope/vim-fugitive"
 	
-	-- use "tpope/vim-vinegar"
-	
+	-- two file explorers
 	use {
-		'theblob42/drex.nvim',
-		requires = 'kyazdani42/nvim-web-devicons',
+		"theblob42/drex.nvim",
+		requires = "kyazdani42/nvim-web-devicons"
 	}
+
+	use "lambdalisue/fern.vim"
 end)

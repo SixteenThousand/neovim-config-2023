@@ -18,6 +18,7 @@ vim.cmd.autocmd("FileType * set formatoptions-=r formatoptions-=c formatoptions-
 
 -- text width
 vim.cmd.set("textwidth=80")
+vim.cmd.autocmd("BufEnter set textwidth=80")
 
 
 -- buffers?? save?? saving?? idk what to call this bit

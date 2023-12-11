@@ -84,7 +84,7 @@ vim.keymap.set("n","<leader>le",function ()
 	else
 		vim.cmd.normal("o\\end{"..env.."}")
 		vim.cmd.stopinsert()
-		vim.cmd.normal("O	")
+		vim.cmd.normal("O\\item")
 	end
 end)
 
@@ -174,7 +174,8 @@ local print_statements = {
 	["html"] = "console.log(",
 	["py"] = "print(",
 	["lua"] = "print(",
-	["c"] = "printf(\"%d\\n\", "
+	["c"] = "printf(\"%d\\n\", ",
+	["ps1"] = "echo "
 }
 local function write_print_statement()
 	vim.cmd.normal("i"..print_statements[vim.fn.expand("%:e")])
