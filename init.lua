@@ -22,6 +22,12 @@ require("thom.functions")
 require("thom.format")
 
 
+-- neovide
+if vim.g.neovide then
+	require("thom.neovide")
+end
+
+
 -- ++++++++++++ Some default settings +++++++++++
 vim.cmd.colorscheme("sonokai")
 vim.cmd.highlight("Folded guibg=bg")
