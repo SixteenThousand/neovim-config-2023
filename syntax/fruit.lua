@@ -14,8 +14,10 @@
 vim.cmd.syntax("match fruitSection /- .* {/")
 vim.cmd.highlight("link fruitSection function")
 
-vim.cmd.syntax("match fruitComment /^#.*/")
+vim.cmd.syntax("match fruitComment /#.*/")
 vim.cmd.highlight("link fruitComment comment")
+
+vim.cmd.set('cms=#%s')
 
 vim.cmd.syntax("match fruitBold /\\*\\*.*\\*\\*/")
 vim.cmd.highlight("link fruitBold exception")
@@ -40,3 +42,6 @@ vim.cmd.highlight("link fruitNumber number")
 
 vim.cmd.syntax("match fruitURL /https:\\/\\/.*\\/ /")
 vim.cmd.highlight("link fruitURL Special")
+
+
+vim.cmd.set("textwidth=70")
