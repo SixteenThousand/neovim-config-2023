@@ -19,10 +19,10 @@ vim.cmd.highlight("link fruitComment comment")
 
 vim.cmd.set('cms=#%s')
 
-vim.cmd.syntax("match fruitBold /\\*\\*.*\\*\\*/")
+vim.cmd.syntax("match fruitBold /\\*\\*[^*]*\\*\\*/")
 vim.cmd.highlight("link fruitBold exception")
 
-vim.cmd.syntax("match fruitString /\".*\"/")
+vim.cmd.syntax("match fruitString /\"[^\"]*\"/")
 vim.cmd.highlight("link fruitString string")
 
 vim.cmd.syntax("match fruitTitle /++++++++++++ .* ++++++++++++/")

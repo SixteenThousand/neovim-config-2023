@@ -2,12 +2,12 @@ local popup = require "plenary.popup"
 
 
 local colourschemes = {
-	"delek",
+	-- "delek",
 	"desert",
 	"elflord",
 	"everforest; hard",
-	"everforest; medium",
-	"everforest; soft",
+	-- "everforest; medium",
+	-- "everforest; soft",
 	"kanagawa-dragon",
 	"kanagawa-lotus",
 	"kanagawa-wave",
@@ -25,9 +25,9 @@ local colourschemes = {
 	"rose-pine-moon",
 	"sonokai",
 	"summerfruit256",
-	"tokyonight-day",
-	"tokyonight-moon",
-	"tokyonight-storm",
+	-- "tokyonight-day",
+	-- "tokyonight-moon",
+	-- "tokyonight-storm",
 	"zellner"
 }
 

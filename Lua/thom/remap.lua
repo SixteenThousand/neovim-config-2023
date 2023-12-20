@@ -50,6 +50,8 @@ vim.keymap.set("n","<CR>",function ()
 		vim.cmd.normal("j")
 	end
 end)
+
+-- ++++++++++++ dealing with empty lines ++++++++++++
 -- *** not navigation stuff, but here to be close to the other <CR> remap ***
 vim.keymap.set("i","<CR>","<leader><BS><CR>")
 
@@ -124,6 +126,10 @@ vim.keymap.set("n","<leader>gf",function ()
 	print("Committed from file <<CommitMsg.txt>>!")
 end)
 vim.keymap.set("n","<leader>gb",":Git branch ")
+vim.keymap.set("n","<leader>gy",function ()
+	vim.cmd("Yona commit")
+end)
+vim.keymap.set("n","<leader>gd",":Git diff<CR>")
 
 
 -- ++++++++++++ reload current file ++++++++++++
@@ -185,7 +191,6 @@ vim.keymap.set("i","<C-p>",write_print_statement)
 -- comment headers
 local function write_custom_message()
 	vim.cmd.normal("i++++++++++++  ++++++++++++")
-	vim.cmd.stopinsert()
 	vim.cmd.normal("12h")
 end
 vim.keymap.set("i","<A-m>",write_custom_message)
@@ -236,16 +241,26 @@ vim.keymap.set("n","zf",function() vim.cmd.set("foldlevel="..vim.v.count) end)
 vim.keymap.set("n","zh",function () vim.cmd("highlight Folded guibg=bg") end)
 vim.keymap.set("n","J","<C-e>")
 vim.keymap.set("n","K","<C-y>")
-vim.keymap.set("n","<A-j>","<C-d>")
-vim.keymap.set("n","<A-k>","<C-u>")
+-- these two are just here to deal windows made by fugitive
+-- see packer.lua or plugins.lua for more
+vim.cmd("map <A-j> <C-e>")
+vim.cmd("map <A-k> <C-y>")
 
 
 -- +++++++++++++ window stuff +++++++++++++
+-- resizing the current window
+-- this could have used vim.cmd("vertical resize +/-10") instead
 vim.keymap.set("n","<A-=>",function()
 	vim.cmd.wincmd("10>")
 end)
 vim.keymap.set("n","<A-->",function()
 	vim.cmd.wincmd("10<")
+end)
+vim.keymap.set("n","<A-+>",function()
+	vim.cmd.resize("+10")
+end)
+vim.keymap.set("n","<A-_>",function()
+	vim.cmd.resize("-10")
 end)
 -- exiting a buffer/window
 vim.keymap.set("n","<A-w>",function ()
@@ -257,22 +272,26 @@ vim.keymap.set("n","<A-w>",function ()
 	end
 	vim.cmd.quit()
 end)
-vim.keymap.set("n","<C-A-w>",function ()
+vim.keymap.set("n","<A-S-w>",function ()
 	local layout1 = vim.fn.winlayout()[1]
 	if layout1 == "row" then 
 		vim.cmd.wincmd("l")
 	elseif layout1 == "col" then
 		vim.cmd.wincmd("j")
 	end
-	vim.cmd.bdelete()
+	vim.cmd { cmd="bdelete", bang=true }
 end)
-vim.keymap.set("n","<C-A-d>",":bdelete term*<C-a><CR>")
+vim.keymap.set("n","<A-S-d>",":bdelete term*<C-a><CR>")
 -- navigating windows
 basic_motions = {"h","j","k","l"}
 for i = 1,4 do
-	local mymap = string.format("<leader>w%s",basic_motions[i])
-	vim.keymap.set("n",mymap,function ()
+	local move_cursor_map = string.format("<leader>w%s",basic_motions[i])
+	vim.keymap.set("n",move_cursor_map,function ()
 		vim.cmd.wincmd(basic_motions[i])
+	end)
+	local move_win_map = string.format("<leader>ww%s",basic_motions[i])
+	vim.keymap.set("n",move_win_map,function()
+		vim.cmd.wincmd(string.upper(basic_motions[i]))
 	end)
 end
 
