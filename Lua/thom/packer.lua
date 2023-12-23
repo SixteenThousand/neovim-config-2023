@@ -36,17 +36,19 @@ return require("packer").startup(function(use)
 	}
 	
 	
-	-- +++++++++++++ finding stuff ++++++++++++
+	-- +++++++++++++ finding stuff/file explorer stuff ++++++++++++
     use {
         "nvim-telescope/telescope.nvim", tag = "0.1.2",
         -- or                            , branch = "0.1.x",
         requires = { {"nvim-lua/plenary.nvim"} }
     }
 	
-    -- use {
-    --     "theprimeagen/harpoon.nvim",
-    -- not right now
-	
+	use "lambdalisue/fern.vim"
+	use "lambdalisue/fern-hijack.vim"
+	use {
+		"lambdalisue/fern-renderer-nerdfont.vim",
+		requires = { {"lambdalisue/nerdfont.vim"} }
+	}
 	
 	-- +++++++++++ LSP stuff & syntax highlighting ++++++++++++
     use("nvim-treesitter/nvim-treesitter", {
@@ -76,11 +78,4 @@ return require("packer").startup(function(use)
 	use "ThePrimeagen/vim-be-good"
 	
 	use "tpope/vim-fugitive"
-	
-	-- use "tpope/vim-vinegar"
-	
-	use {
-		'theblob42/drex.nvim',
-		requires = 'kyazdani42/nvim-web-devicons',
-	}
 end)

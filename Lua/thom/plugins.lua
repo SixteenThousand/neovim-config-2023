@@ -12,20 +12,6 @@ require("telescope").setup({
 	}
 })
 
-require("drex.config").configure({
-	-- hijack_netrw = true,
-	keybindings = {
-		["n"] = {
-			["<C-t>"] = function ()
-				local parent = vim.fn.expand("%:p:h")
-				vim.cmd.tabnew()
-				vim.cmd("Drex "..parent)
-				print("We got here!")
-			end
-		}
-	}
-})
-
 -- VimTeX stuff
 vim.cmd("filetype plugin on")
 -- this bit SHOULD be covered in packer.lua
