@@ -1,5 +1,6 @@
 -- the place for all of the plugin configs
 
+
 require("telescope").setup({
 	vimgrep_arguments = {
 		"rg",
@@ -12,19 +13,6 @@ require("telescope").setup({
 	}
 })
 
-require("drex.config").configure({
-	hijack_netrw = true,
-	keybindings = {
-		["n"] = {
-			["<C-t>"] = function ()
-				local parent = vim.fn.expand("%:p:h")
-				vim.cmd.tabnew()
-				vim.cmd("Drex "..parent)
-				print("We got here!")
-			end
-		}
-	}
-})
 
 -- VimTeX stuff
 vim.cmd("filetype plugin on")
@@ -33,6 +21,7 @@ vim.cmd("filetype plugin on")
 -- 	ignore_install = { "latex" },
 -- 	-- more stuff here
 -- }
+
 
 require("lualine").setup({
     options = {
@@ -55,4 +44,5 @@ vim.g.closetag_shortcut = ">"
 vim.g.closetag_close_shortcut = "<C-A-F1>"
 -- this one is designed to never be used
 
--- require("vim-jsx-pretty").setup()
+
+vim.g["fern#renderer"] = "nerdfont"

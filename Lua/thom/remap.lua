@@ -13,56 +13,38 @@ end)
 vim.keymap.set("n","<leader>ee",":buffer ")
 
 vim.keymap.set("n","<leader>eh",function ()
-	vim.cmd("Drex ~/Documents/Programs")
+	vim.cmd.edit("~/Documents/Programs")
 	vim.cmd.set("number")
 end)
 
 vim.keymap.set("n","<leader>ea",function ()
-	vim.cmd("Drex ~/Documents/MyApps")
+	vim.cmd.edit("~/Documents/MyApps")
 	vim.cmd.set("number")
 end)
 
 vim.keymap.set("n","e'",function ()
-    vim.cmd("Drex ~/AppData/Local/nvim")
+    vim.cmd.edit("~/AppData/Local/nvim")
 	vim.cmd.set("number")
 end)
 
--- drex stuff
--- for when it inevitably goes wrong
-vim.keymap.set("n","<leader>ed",":Drex")
-vim.keymap.set("n","-", function ()
-	if vim.bo.filetype == "drex" then
-		require("drex.elements").open_parent_directory()
-	else
-		vim.cmd("Drex %:h")
-	end
+vim.keymap.set("n","-",function ()
+	vim.cmd.edit(vim.fn.expand("%:h"))
 end)
-vim.keymap.set("n","<CR>",function ()
-	if vim.bo.filetype == "drex" then
-		local elems = require("drex.elements")
-		local line = vim.api.nvim_get_current_line()
-		if require("drex.utils").is_directory(line) then
-			elems.open_directory()
-		else
-			elems.expand_element()
-		end
-	else
-		vim.cmd.normal("j")
-	end
-end)
-
--- ++++++++++++ dealing with empty lines ++++++++++++
--- *** not navigation stuff, but here to be close to the other <CR> remap ***
-vim.keymap.set("i","<CR>","<leader><BS><CR>")
 
 -- new tab stuff
 function newtabex()
 	local parent = vim.fn.expand("%:p:h")
 	vim.cmd.tabnew()
-	vim.cmd("Drex "..parent)
+	vim.cmd.edit(parent)
 end
 vim.keymap.set("n","<C-t>", newtabex) 
 vim.keymap.set("i","<C-t>", newtabex)
+
+
+-- ++++++++++++ dealing with empty lines ++++++++++++
+-- enter remap
+vim.keymap.set("i","<CR>","<leader><BS><CR>")
+
 
 -- ++++++++++++ opening a terminal (in a new tab) ++++++++++++
 vim.keymap.set("n","<leader>tt",function ()
