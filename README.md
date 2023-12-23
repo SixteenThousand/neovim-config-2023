@@ -23,3 +23,4 @@ highly-extensible, terminal based code editor.
  - Make terminal windows (see `terminal_stuff.lua`) be more narrow by default
  - stop the session manager throwing window-id errors (low priority, does not
 	affect functionality)
+ - integrate quickfix list into my workflow (will likely remquire new remaps)

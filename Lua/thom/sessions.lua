@@ -4,6 +4,7 @@ local popup = require "plenary.popup"
 local sessions_loc = "C:/Users/thoma/AppData/Local/nvim/Sessions/"
 local ext = ".session.vim"
 local pattern = "(.+)%.session.vim"
+local no_session_opt = "continue sans session"
 
 local function sess_file(name)
 	-- takes the name of a session and gives you the full filepath
@@ -13,7 +14,7 @@ end
 
 local function session_menu(title,action)
 	local sessions_dir = vim.fs.dir(sessions_loc)
-	local sessions = {"continue sans session"}
+	local sessions = {no_session_opt}
 	for filename,_ in sessions_dir do
 		_,_,sessions[#sessions+1] = filename:find(pattern)
 	end
@@ -21,13 +22,15 @@ local function session_menu(title,action)
 		title = title,
 		border = true,
 		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-		minwidth = #title + 10,
+		minwidth = #title + 30,
 		callback = action,
 	})
+	vim.cmd.set("number")
+	vim.cmd.set("relativenumber")
 end
 
 local function load_session(_,session_name)
-	if session_name == "continue sans session" then
+	if session_name == no_session_opt then
 		print("No session needed buddy!")
 	else
 		vim.cmd.quit()
@@ -54,7 +57,7 @@ local function delete_drex_buffers(path)
 end
 
 local function save_session(_,session_name)
-	if session_name == "continue sans session" then
+	if session_name == no_session_opt then
 		vim.cmd.quitall()
 	else
 		vim.cmd.quit()
@@ -70,6 +73,7 @@ end
 -- ++++++++++++ interface ++++++++++++
 function LoadSession()
 	session_menu("Load Session",load_session)
+	vim.cmd.set("relativenumber")
 end
 function SaveSession()
 	session_menu("Save Session",save_session)
