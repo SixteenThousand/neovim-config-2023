@@ -1,8 +1,10 @@
 -- honetsly this is just miscellaneous stuff
 local termstuff = require("thom.terminal_stuff")
 
+local M = {}
 
-local function validate(arg,default)
+
+M.validate = function(arg,default)
 	if arg == "" then 
 		return default
 	else
@@ -12,7 +14,7 @@ end
 
 local function Firefox(opts)
 	-- opens the current buffer in firefox
-	local file = validate(opts.args,vim.fn.expand("%:p"))
+	local file = M.validate(opts.args,vim.fn.expand("%:p"))
 	-- termstuff.make_terminal_window()
 	-- vim.cmd.terminal("firefox -htmlfile "..file)
 	vim.fn.jobstart("firefox -htmlfile '"..file.."'")
@@ -22,11 +24,8 @@ vim.api.nvim_create_user_command("Firefox",Firefox,{nargs="?"})
 local function CopyPath(opts)
 	-- puts the current buffer's full path in the spcified register,
 	-- or into the default register if none is given
-	local register = validate(opts.args,"\"")
+	local register = M.validate(opts.args,"\"")
 	local path = vim.fn.expand("%:p")
-	if path:sub(1,7) == "drex://" then
-		path = path:sub(8,-1)
-	end
 	vim.fn.setreg(register,path)
 	print("Path copied!")
 end
@@ -83,8 +82,6 @@ vim.api.nvim_create_user_command("Jaeha",
 	{nargs="*"}
 )
 
-local exports = {
-	["validate"] = validate
-}
 
-return exports
+
+return M
