@@ -1,4 +1,4 @@
--- ++++++++++ leader key +++++++++++
+-- ++++++++++ leader/<Plug>/plug key +++++++++++
 vim.g.mapleader = " "
 
 
@@ -28,7 +28,7 @@ vim.keymap.set("n","e'",function ()
 end)
 
 vim.keymap.set("n","-",function ()
-	vim.cmd.edit(vim.fn.expand("%:h"))
+	vim.cmd.edit("%:h")
 end)
 
 -- new tab stuff
@@ -116,9 +116,8 @@ vim.keymap.set("n","<leader>gd",":Git diff<CR>")
 
 -- ++++++++++++ reload current file ++++++++++++
 vim.keymap.set("n","<A-r>",function ()
-	local current = vim.fn.expand("%:p")
-	vim.cmd.Explore()
-	vim.cmd.edit(current)
+	vim.cmd.edit()
+	require("lualine").refresh()
 end)
 
 

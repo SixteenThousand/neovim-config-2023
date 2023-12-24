@@ -22,7 +22,7 @@ local function session_menu(title,action)
 		title = title,
 		border = true,
 		borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-		minwidth = #title + 30,
+		minwidth = #title + 20,
 		callback = action,
 	})
 	vim.cmd.set("number")
