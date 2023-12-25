@@ -11,10 +11,9 @@ highly-extensible, terminal based code editor.
 
 ## Planned Changes
  - Add LSP support
- - Fix issue with Drex and loading of session files (now partially fixed;
+ <!-- - Fix issue with Drex and loading of session files (now partially fixed;
 	this is not an issue now, however the solution is quite hacky and probably
-	quite fragile)
- - Alternative to above: investigate Fern as another file explorer option
+	quite fragile) -->
  - Add autoformatting (most likely using Prettier, or just existing vim tools)
 	to automatically narrow text to be 80 characters wide
  - Make splits open vertically by default
@@ -23,4 +22,4 @@ highly-extensible, terminal based code editor.
  - Make terminal windows (see `terminal_stuff.lua`) be more narrow by default
  - stop the session manager throwing window-id errors (low priority, does not
 	affect functionality)
- - integrate quickfix list into my workflow (will likely remquire new remaps)
+ - integrate quickfix list into my workflow (will likely require new remaps)

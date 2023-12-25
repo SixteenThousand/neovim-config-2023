@@ -116,6 +116,7 @@ end)
 vim.keymap.set("n","<A-r>",function ()
 	vim.cmd.edit()
 	require("lualine").refresh()
+	print("Page reloaded!")
 end)
 
 
