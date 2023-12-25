@@ -1,5 +1,7 @@
 -- ++++++++++++ this script manages session related stuff ++++++++++++
 
+local M = {}
+
 local popup = require "plenary.popup"
 local sessions_loc = "C:/Users/thoma/AppData/Local/nvim/Sessions/"
 local ext = ".session.vim"
@@ -49,20 +51,33 @@ local function save_session(_,session_name)
 	end
 end
 
+local function save_session_noquit(_,session_name)
+	if session_name == no_session_opt then
+		print(
+			"Welp, don't blame me if lose your place in all those documents!"
+		)
+	else
+		vim.cmd("mksession! "..sess_file(session_name))
+		print("Session saved!")
+	end
+end
 
 
 
 -- ++++++++++++ interface ++++++++++++
-function LoadSession()
+function M.LoadSession()
 	session_menu("Load Session",load_session)
 	vim.cmd.set("relativenumber")
 end
-function SaveSession()
-	session_menu("Save Session",save_session)
+function M.SaveSession()
+	session_menu("Save Before You Leave!",save_session)
+end
+function M.SaveSessionNoQuit()
+	session_menu("Save Session & Stay",save_session_noquit)
 end
 
-vim.api.nvim_create_user_command("LoadSession",LoadSession,{})
-vim.api.nvim_create_user_command("SaveSession",SaveSession,{})
+vim.api.nvim_create_user_command("LoadSession",M.LoadSession,{})
+vim.api.nvim_create_user_command("SaveSession",M.SaveSession,{})
 vim.api.nvim_create_user_command("NewSession", 
 	function (argstable)
 		vim.cmd.mksession(sess_file(argstable.args))
@@ -86,3 +101,6 @@ vim.api.nvim_create_user_command("DeleteSession",
 	end,
 	{ nargs=1 }
 )
+
+
+return M

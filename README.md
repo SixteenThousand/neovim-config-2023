@@ -17,8 +17,6 @@ highly-extensible, terminal based code editor.
  - Add autoformatting (most likely using Prettier, or just existing vim tools)
 	to automatically narrow text to be 80 characters wide
  - Make splits open vertically by default
- - Add a variant of the "Save session and Quit Nvim" menu which just saves a
- session without quitting
  - Make terminal windows (see `terminal_stuff.lua`) be more narrow by default
  - stop the session manager throwing window-id errors (low priority, does not
 	affect functionality)

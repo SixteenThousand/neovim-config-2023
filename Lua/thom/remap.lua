@@ -283,9 +283,10 @@ vim.keymap.set("i","<A-S-e>",term.runexe_win)
 
 
 -- session stuff
-local sessions = require "thom.sessions"
-vim.keymap.set("n","<A-s>",LoadSession)
-vim.keymap.set("n","<A-q>",SaveSession)
+local sess = require("thom.sessions")
+vim.keymap.set("n","<A-s>",sess.LoadSession)
+vim.keymap.set("n","<A-q>",sess.SaveSession)
+vim.keymap.set("n","<A-S-s>",sess.SaveSessionNoQuit)
 
 -- yona
 vim.keymap.set("n","<A-i>",function () vim.cmd("Yona build") end)
