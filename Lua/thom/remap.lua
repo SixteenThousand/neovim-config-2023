@@ -37,8 +37,7 @@ function newtabex()
 	vim.cmd.tabnew()
 	vim.cmd.edit(parent)
 end
-vim.keymap.set("n","<C-t>", newtabex) 
-vim.keymap.set("i","<C-t>", newtabex)
+vim.keymap.set({"n","i"},"<C-t>", newtabex) 
 
 
 -- ++++++++++++ dealing with empty lines ++++++++++++
@@ -111,7 +110,6 @@ vim.keymap.set("n","<leader>gb",":Git branch ")
 vim.keymap.set("n","<leader>gy",function ()
 	vim.cmd("Yona commit")
 end)
-vim.keymap.set("n","<leader>gd",":Git diff<CR>")
 
 
 -- ++++++++++++ reload current file ++++++++++++
@@ -131,18 +129,13 @@ vim.keymap.set("v","<C-_>",commapi.toggle.linewise.current)
 
 
 -- ++++++++++++ copy & paste ++++++++++++
-vim.keymap.set("n","<leader>y","\"+y")
-vim.keymap.set("n","<leader>p","\"+p")
-vim.keymap.set("v","<leader>y","\"+y")
-vim.keymap.set("v","<leader>p","\"+p")
+vim.keymap.set({"n","v"},"<leader>y","\"+y")
+vim.keymap.set({"n","v"},"<leader>p","\"+p")
 	-- these let me copy & paste with the outside world
-vim.keymap.set("n", "<leader>d","\"_d")
-vim.keymap.set("v", "<leader>d","\"_d")
+vim.keymap.set({"n","v"}, "<leader>d","\"_d")
 	-- these send things to the void registry, never to be seen again
-vim.keymap.set("n","<leader>xx","\"xd")
-vim.keymap.set("n","<leader>xp","\"xp")
-vim.keymap.set("v","<leader>xx","\"xd")
-vim.keymap.set("v","<leader>xp","\"xp")
+vim.keymap.set({"n","v"},"<leader>xx","\"xd")
+vim.keymap.set({"n","v"},"<leader>xp","\"xp")
 
 
 -- ++++++++++++ suggestions & completion ++++++++++++
@@ -151,7 +144,6 @@ vim.keymap.set("i","<C-d>","<C-y>")
 
 
 -- ++++++++++++ sometimes I just can't be bothered to write stuff, y'know? ++++++++++++
--- print statements
 local print_statements = {
 	["java"] = "System.out.println(",
 	["cs"] = "Console.WriteLine(",
@@ -164,35 +156,21 @@ local print_statements = {
 	["c"] = "printf(\"%d\\n\", ",
 	["ps1"] = "echo "
 }
-local function write_print_statement()
+vim.keymap.set("i","<C-p>",function ()
 	vim.cmd.normal("i"..print_statements[vim.fn.expand("%:e")])
-end
-vim.keymap.set("i","<C-p>",write_print_statement)
+end)
 
--- comment headers
-local function write_custom_message()
+-- comment headers/comment highlighting
+vim.keymap.set("i","<A-m>",function ()
 	vim.cmd.normal("i++++++++++++  ++++++++++++")
 	vim.cmd.normal("12h")
-end
-vim.keymap.set("i","<A-m>",write_custom_message)
+end)
 
--- highlight a place to be completed
 vim.keymap.set("i","<A-S-m>","************")
 
-vim.keymap.set("t","<A-e>","exit")
-
--- end of line comments
-local function debug_comment()
-	vim.cmd.normal("gcAdebug") -- nice!!
-end
-vim.keymap.set("i","<A-/>",debug_comment)
-vim.keymap.set("n","<A-/>",debug_comment)
-
-local function tbc_comment()
-	vim.cmd.normal("gcATBC")
-end
-vim.keymap.set("n","<A-b>",tbc_comment)
-vim.keymap.set("i","<A-b>",tbc_comment)
+vim.keymap.set({"n","i"},"<A-/>",function ()
+	vim.cmd.normal("gcAdebug")
+end)
 
 
 -- ++++++++++++ searching/highlighting ++++++++++++
@@ -213,6 +191,7 @@ vim.keymap.set("i","<C-v>",function ()
 	vim.cmd.Visual()
 end)
 vim.keymap.set("t","<C-[>","<C-\\><C-N>")
+vim.keymap.set("t","<Esc>","<C-\\><C-N>")
 vim.keymap.set("t","<C-PageUp>","<C-\\><C-N><C-PageUp>")
 vim.keymap.set("t","<C-PageDown>","<C-\\><C-N><C-PageDown>")
 
@@ -278,11 +257,10 @@ end
 
 
 -- ++++++++++++ save a file ++++++++++++
-vim.keymap.set("i","<C-s>",function()
+vim.keymap.set({"n","i"},"<C-s>",function()
 	vim.cmd.stopinsert()
 	vim.cmd.write()
 end)
-vim.keymap.set("n","<C-s>",vim.cmd.write)
 
 
 -- ++++++++++++ using other modules that i wrote ++++++++++++
