@@ -10,7 +10,7 @@ highly-extensible, terminal based code editor.
 
 
 ## Planned Changes
- - Add LSP support
+ - Add LSP support (started with some success!)
  <!-- - Fix issue with Drex and loading of session files (now partially fixed;
 	this is not an issue now, however the solution is quite hacky and probably
 	quite fragile) -->
@@ -18,6 +18,6 @@ highly-extensible, terminal based code editor.
 	to automatically narrow text to be 80 characters wide
  - Make splits open vertically by default
  - Make terminal windows (see `terminal_stuff.lua`) be more narrow by default
- - stop the session manager throwing window-id errors (low priority, does not
-	affect functionality)
+ - stop the session manager throwing window-id errors (on hiatus; looks like the
+ APIs my pop-ups are based on is quite unstable)
  - integrate quickfix list into my workflow (will likely require new remaps)
