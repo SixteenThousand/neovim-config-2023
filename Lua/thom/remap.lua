@@ -45,13 +45,13 @@ vim.keymap.set({"n","i"},"<C-t>", newtabex)
 vim.keymap.set("i","<CR>","<leader><BS><CR>")
 
 
--- ++++++++++++ opening a terminal (in a new tab) ++++++++++++
+-- ++++++++++++ terminal mode remaps ++++++++++++
 vim.keymap.set("n","<leader>tt",function ()
 	vim.cmd("let @\"='cd "..vim.fn.expand("%:p:h").."'")
 	vim.cmd.tabnew()
 	vim.cmd.terminal()
 end)
-vim.keymap.set("n","<leader>th",function ()
+vim.keymap.set("n","<leader>tp",function ()
 	vim.cmd.startinsert()
 	vim.cmd.stopinsert()
 	vim.cmd.normal("p")
@@ -233,7 +233,7 @@ vim.keymap.set("n","<A-w>",function ()
 	end
 	vim.cmd.quit()
 end)
-vim.keymap.set("n","<A-S-w>",function ()
+vim.keymap.set({"n","i","t"},"<A-S-w>",function ()
 	local layout1 = vim.fn.winlayout()[1]
 	if layout1 == "row" then 
 		vim.cmd.wincmd("l")
