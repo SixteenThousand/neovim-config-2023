@@ -25,8 +25,6 @@ return require("packer").startup(function(use)
 	
 	use "xero/miasma.nvim"
 	
-	use "folke/tokyonight.nvim"
-	
 	-- ++++++++++++ other asthetic stuff ++++++++++++
 	use "nvim-tree/nvim-web-devicons"
 	
