@@ -10,6 +10,8 @@ end)
 
 
 -- +++++++++++++ navigation ++++++++++++
+vim.keymap.set("n","<leader>ef",":Fern ")
+	-- did not work in plugins.lua for some reason
 vim.keymap.set("n","<leader>ee",":buffer ")
 
 vim.keymap.set("n","<leader>eh",function ()
@@ -31,7 +33,7 @@ vim.keymap.set("n","-",function ()
 	vim.cmd.edit("%:h")
 end)
 
--- new tab stuff
+-- tab stuff
 function newtabex()
 	local parent = vim.fn.expand("%:p:h")
 	vim.cmd.tabnew()
@@ -47,8 +49,8 @@ vim.keymap.set("i","<CR>","<leader><BS><CR>")
 
 -- ++++++++++++ terminal mode remaps ++++++++++++
 vim.keymap.set("n","<leader>tt",function ()
-	vim.cmd("let @\"='cd "..vim.fn.expand("%:p:h").."'")
-	vim.cmd.tabnew()
+	vim.cmd("let @+='cd "..vim.fn.expand("%:p:h").."'")
+	vif.cmd.tabnew()
 	vim.cmd.terminal()
 end)
 vim.keymap.set("n","<leader>tp",function ()
