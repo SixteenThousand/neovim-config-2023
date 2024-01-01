@@ -12,7 +12,6 @@ vim.cmd.set("shiftwidth=4")
 vim.cmd.set("tabstop=4")
 vim.cmd.set("cpoptions+=I")
 	-- means autoindenting doesn't get deleted all the time
-vim.cmd.autocmd("FileType lisp set nolisp")
 vim.cmd.autocmd("FileType * set noexpandtab")
 vim.cmd.autocmd("FileType * set formatoptions-=r formatoptions-=c formatoptions-=o")
 
@@ -31,3 +30,6 @@ vim.cmd.set("autowriteall")
 
 -- allow h & l to take you to a new line
 vim.cmd.set("whichwrap=b,s,h,l")
+
+-- lisp-specific conifgs
+vim.cmd.autocmd("FileType lisp set list")

@@ -18,6 +18,7 @@ highly-extensible, terminal based code editor.
 	to automatically narrow text to be 80 characters wide
  - Make splits open vertically by default
  - Make terminal windows (see `terminal_stuff.lua`) be more narrow by default
- - stop the session manager throwing window-id errors (on hiatus; looks like the
+ - Stop the session manager throwing window-id errors (on hiatus; looks like the
  APIs my pop-ups are based on is quite unstable)
- - integrate quickfix list into my workflow (will likely require new remaps)
+ - Integrate quickfix list into my workflow (will likely require new remaps)
+ - Make Fern show hidden items by default

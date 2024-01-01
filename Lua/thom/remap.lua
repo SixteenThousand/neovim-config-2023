@@ -50,7 +50,7 @@ vim.keymap.set("i","<CR>","<leader><BS><CR>")
 -- ++++++++++++ terminal mode remaps ++++++++++++
 vim.keymap.set("n","<leader>tt",function ()
 	vim.cmd("let @+='cd "..vim.fn.expand("%:p:h").."'")
-	vif.cmd.tabnew()
+	vim.cmd.tabnew()
 	vim.cmd.terminal()
 end)
 vim.keymap.set("n","<leader>tp",function ()
