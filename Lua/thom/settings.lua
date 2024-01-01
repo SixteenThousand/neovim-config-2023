@@ -33,3 +33,11 @@ vim.cmd.set("whichwrap=b,s,h,l")
 
 -- lisp-specific conifgs
 vim.cmd.autocmd("FileType lisp set list")
+
+-- spell check
+vim.api.nvim_create_autocmd("BufEnter",{
+	pattern="*.md",
+	callback= function (evt)
+		vim.cmd.setlocal("spell")
+	end
+})
