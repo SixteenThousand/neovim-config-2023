@@ -20,3 +20,5 @@ to automatically narrow text to be 80 characters wide
  - Integrate quickfix list into my workflow (will likely require new remaps)
  - Make Fern show hidden items by default
  - Make function that automatically opens a relevant REPL
+ - Make telescope picker to look through files of a project or just the files in
+ the current buffer's main directory
