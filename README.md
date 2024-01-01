@@ -1,6 +1,6 @@
-# My Neovim Config
+# My Neovim Configuration
 
-Just my (fairly lightwieght) configuration for the neovim, the
+Just my (fairly lightweight) configuration for the neovim, the
 highly-extensible, terminal based code editor.
 
 ## Interesting features
@@ -19,3 +19,4 @@ to automatically narrow text to be 80 characters wide
  APIs my pop-ups are based on is quite unstable)
  - Integrate quickfix list into my workflow (will likely require new remaps)
  - Make Fern show hidden items by default
+ - Make function that automatically opens a relevant REPL
