@@ -11,9 +11,6 @@ highly-extensible, terminal based code editor.
 
 ## Planned Changes
  - Add LSP support (started with some success!)
- <!-- - Fix issue with Drex and loading of session files (now partially fixed;
-	this is not an issue now, however the solution is quite hacky and probably
-	quite fragile) -->
  - Add autoformatting (most likely using Prettier, or just existing vim tools)
 	to automatically narrow text to be 80 characters wide
  - Make splits open vertically by default
