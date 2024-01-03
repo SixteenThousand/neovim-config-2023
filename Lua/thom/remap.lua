@@ -40,6 +40,9 @@ function newtabex()
 	vim.cmd.edit(parent)
 end
 vim.keymap.set({"n","i"},"<C-t>", newtabex) 
+vim.keymap.set("n","gr",function ()
+	vim.cmd.tabprevious()
+end)
 
 
 -- ++++++++++++ dealing with empty lines ++++++++++++
