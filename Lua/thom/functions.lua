@@ -69,16 +69,4 @@ vim.api.nvim_create_user_command("Nospell",
 	{}
 )
 
-vim.api.nvim_create_user_command("Jaeha",
-	function (opts)
-		print(opts.fargs[1])
-		print(opts.fargs[2])
-		print(opts.fargs[3])
-		print(opts.bang)
-	end,
-	{nargs="*"}
-)
-
-
-
 return M

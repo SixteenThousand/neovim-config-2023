@@ -15,3 +15,11 @@ vim.keymap.set("v","<C-/>",commapi.toggle.linewise.current)
 
 
 vim.o.guifont = "Agave Nerd Font Mono:h11"
+
+vim.g.neovide_transparency = 0.8
+-- vim.api.nvim_create_user_command("Trans",
+-- 	function (opts)
+-- 		vim.g.neovide_transparency = opts.fargs[1]
+-- 	end,
+-- 	{nargs="*"}
+-- )
