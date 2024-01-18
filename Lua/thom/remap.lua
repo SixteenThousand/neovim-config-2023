@@ -24,7 +24,7 @@ vim.keymap.set("n","<leader>ea",function ()
 	vim.cmd.set("number")
 end)
 
-vim.keymap.set("n","e'",function ()
+vim.keymap.set("n","<leader>e'",function ()
     vim.cmd.edit("~/AppData/Local/nvim")
 	vim.cmd.set("number")
 end)
