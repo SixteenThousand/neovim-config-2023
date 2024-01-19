@@ -1,3 +1,12 @@
+### Notice: this config is no longer in use!
+
+It seems my neovim installation has become laughably out of date, to the point
+where even my package manager is deprecated. Hence I have decided to reinstall
+neovim (using a package manager this time!) and rewrite my config from scratch
+(although most of it will likely be copy-pasted from this repo).
+You can find the new config 
+![here](https://github.com/SixteenThousand/neovim-config-2024).
+
 # My Neovim Configuration
 
 Just my (fairly lightweight) configuration for the neovim, the
